@@ -1,0 +1,42 @@
+drop sequence hibernate_sequence;
+drop table inventory;
+drop table product;
+drop table orders;
+create sequence hibernate_sequence start with 1 increment by 1;
+
+
+    create table inventory (
+       id bigint not null,
+        quantity integer,
+        reserved_inventory integer,
+        settled_inventory integer,
+        product_id bigint,
+        primary key (id)
+    );
+
+
+    create table orders (
+       id bigint not null,
+        quantity integer,
+        product_id bigint,
+        primary key (id)
+    );
+
+
+    create table product (
+       product_id bigint not null,
+        color varchar(255),
+        item_code varchar(255),
+        name varchar(255),
+        primary key (product_id)
+    );
+
+    alter table inventory
+       add constraint FKp7gj4l80fx8v0uap3b2crjwp5
+       foreign key (product_id)
+       references product;
+
+    alter table orders
+       add constraint FK787ibr3guwp6xobrpbofnv7le
+       foreign key (product_id)
+       references product;
